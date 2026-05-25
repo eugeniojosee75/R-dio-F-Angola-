@@ -1,0 +1,404 @@
+/* Configurações Globais e Gradiente do Fundo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #102a6b 0%, #081229 50%, #5c1839 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    padding: 20px;
+}
+
+/* Contentor do Player */
+.player-container {
+    background-color: rgba(10, 20, 43, 0.95);
+    width: 100%;
+    max-width: 410px;
+    height: 840px;
+    border-radius: 40px;
+    border: 8px solid #222;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px 15px 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Topo / Header */
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 40px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.icon-btn:hover { opacity: 1; }
+
+.live-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.badge-live {
+    background-color: #ff3b30;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-live i {
+    font-size: 0.5rem;
+    animation: blink 1.5s infinite;
+}
+
+.listeners {
+    font-size: 0.75rem;
+    color: #a0aabf;
+}
+
+/* Sistema de Ecrãs Intermutáveis */
+.player-screen {
+    display: none;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 10px;
+}
+
+.player-screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.player-screen::-webkit-scrollbar { width: 0px; }
+
+.screen-header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+.screen-header h3 {
+    font-size: 1.2rem;
+    color: #ff3b30;
+    font-weight: 500;
+}
+
+/* --- DESIGN DO AO VIVO (COM ONDAS DE BATIDA ADICIONADAS) --- */
+.player-display {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.logo-glow-wrapper {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #ffde6a 0%, #f37643 100%);
+    padding: 6px;
+    box-shadow: 0 0 40px rgba(243, 118, 67, 0.45);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+}
+
+/* Elementos das Ondas de Choque Invisíveis por padrão */
+.pulse-wave {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(243, 118, 67, 0.35);
+    z-index: 1;
+    opacity: 0;
+    transform: scale(1);
+}
+
+/* Quando a rádio estiver a dar som, ativa estas animações de batida e onda */
+.playing .logo-circle {
+    animation: bounceBeat 0.7s infinite alternate ease-in-out;
+}
+
+.playing .wave-1 {
+    animation: rippleEffect 1.4s infinite linear;
+}
+
+.playing .wave-2 {
+    animation: rippleEffect 1.4s infinite linear;
+    animation-delay: 0.7s;
+}
+
+.radio-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.wave-left, .wave-right {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    border-left: 2px solid rgba(255,255,255,0.3);
+    border-right: 2px solid rgba(255,255,255,0.3);
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.4;
+    z-index: 3;
+}
+.wave-left { left: -40px; }
+.wave-right { right: -40px; }
+
+.station-info {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.station-info h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.tagline {
+    font-size: 0.95rem;
+    color: #cdd4e2;
+    margin-bottom: 15px;
+}
+
+.tags-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    color: #a0aabf;
+}
+
+/* --- DESIGN DA PROGRAMAÇÃO --- */
+.program-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.program-list li {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 12px 16px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.prog-num {
+    background: rgba(255, 59, 48, 0.2);
+    color: #ff3b30;
+    font-weight: bold;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 0.85rem;
+}
+
+/* --- DESIGN DOS AJUSTES / CONTACTOS --- */
+.contacts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-item {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s;
+}
+
+.contact-item:hover { background: rgba(255, 255, 255, 0.08); }
+.contact-item i { font-size: 1.6rem; margin-right: 18px; width: 30px; text-align: center; }
+
+.whatsapp-icon { color: #25D366; }
+.email-icon { color: #ea4335; }
+.facebook-icon { color: #1877F2; }
+.instagram-icon { color: #E1306C; }
+
+.contact-label { font-size: 0.75rem; color: #a0aabf; text-transform: uppercase; letter-spacing: 0.5px; }
+.contact-value { font-size: 1rem; font-weight: 500; margin-top: 2px; }
+.text-small { font-size: 0.85rem; }
+
+/* --- CONTROLOS FIXOS INFERIORES --- */
+.footer-controls {
+    margin-top: auto;
+    background-color: rgba(10, 20, 43, 0.95);
+    padding-top: 10px;
+}
+
+.player-controls { margin-bottom: 20px; }
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    margin-bottom: 20px;
+}
+
+.nav-btn { font-size: 1.4rem; }
+.minor-btn { font-size: 1.1rem; color: #a0aabf; }
+.fav-btn { color: #ff3b30; opacity: 1; }
+
+.play-btn {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: none;
+    color: #0a142b;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.1s;
+}
+
+.play-btn:active { transform: scale(0.95); }
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #a0aabf;
+    font-size: 0.85rem;
+    padding: 0 10px;
+}
+
+.volume-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+/* Menu de Navegação */
+.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 15px;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #63718a;
+    font-size: 0.7rem;
+    width: 22%;
+    cursor: pointer;
+}
+
+.nav-item.active { color: #ff3b30; }
+.nav-item i { font-size: 1.2rem; }
+
+/* --- NOVAS ANIMAÇÕES --- */
+/* Efeito de compressão da batida no círculo principal */
+@keyframes bounceBeat {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03); }
+}
+
+/* Efeito de ondas concêntricas a expandir e sumir */
+@keyframes rippleEffect {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(1.35);
+        opacity: 0;
+    }
+}
+
+@keyframes blink {
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.2; }
+}

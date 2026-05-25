@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rádio Fé Angola - Web Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="radio-stream" src="https://stream.zeno.fm/gsndh1xvczetv"></audio>
+
+    <div class="player-container">
+        <header class="player-header">
+            <button class="icon-btn"><i class="fa-solid fa-bars"></i></button>
+            <div class="live-status">
+                <span class="badge-live"><i class="fa-solid fa-circle"></i> AO VIVO</span>
+                <span class="listeners"><i class="fa-solid fa-users"></i> <span id="live-listeners">2</span> ouvintes</span>
+            </div>
+            <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i></button>
+        </header>
+
+        <div id="screen-aovivo" class="player-screen active">
+            <main class="player-display">
+                <div class="logo-glow-wrapper" id="logo-wrapper">
+                    <div class="pulse-wave wave-1"></div>
+                    <div class="pulse-wave wave-2"></div>
+                    <div class="logo-circle">
+                        <img src="logo.jpg" alt="Rádio Fé Angola" class="radio-logo">
+                    </div>
+                    <div class="wave-left"></div>
+                    <div class="wave-right"></div>
+                </div>
+            </main>
+
+            <section class="station-info">
+                <h2>Rádio Fé Angola</h2>
+                <p class="tagline">A sua melhor sintonia!</p>
+                
+                <div class="tags-container">
+                    <span class="tag">Educação</span>
+                    <span class="tag">Fé</span>
+                    <span class="tag">Música</span>
+                    <span class="tag">Informação</span>
+                </div>
+            </section>
+        </div>
+
+        <div id="screen-programacao" class="player-screen">
+            <div class="screen-header">
+                <h3><i class="fa-solid fa-calendar-days"></i> Programação</h3>
+            </div>
+            <ul class="program-list">
+                <li><span class="prog-num">1</span> Coisas de Mulher | Quarta e Sexta-feira 10:00 - 11:00</li>
+                <li><span class="prog-num">2</span> A Voz do Conhecimento | Terça e Quinta-feira 18:35 - 19:45</li>
+                <li><span class="prog-num">3</span> Suavidade na rádio | Segunda e Sexta-feira 19:00 - 20:00</li>
+                <li><span class="prog-num">4</span> Reflexão do Dia | Segunda e Sexta-feira 20:00 - 20:30</li>
+                <li><span class="prog-num">5</span> Tarde Alegre | Quarta e Sexta-feira 17:00 - 18:00</li>
+                <li><span class="prog-num">6</span> Tarde de Sábado | Sábado 17:00 - 18:00</li>
+                <li><span class="prog-num">7</span> Bom Dia Meninos | Sábado 10:00 - 11:00</li>
+                <li><span class="prog-num">8</span> Vibração na rádio | Sábado 14:00 - 15:00</li>
+                <li><span class="prog-num">9</span> Pôr-do-Sol | Terça e Quinta-feira 17:00 - 18:00</li>
+                <li><span class="prog-num">10</span> Momentos de Fé | Segunda á Sexta-feira 21:30 - 22:00</li>
+            </ul>
+        </div>
+
+        <div id="screen-ajustes" class="player-screen">
+            <div class="screen-header">
+                <h3><i class="fa-solid fa-gear"></i> Ajustes & Contactos</h3>
+            </div>
+            <div class="contacts-container">
+                <a href="https://wa.me/244956083866" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-whatsapp whatsapp-icon"></i>
+                    <div>
+                        <p class="contact-label">WhatsApp</p>
+                        <p class="contact-value">956 083 866</p>
+                    </div>
+                </a>
+                <a href="mailto:radiofeangola2022@gmail.com" class="contact-item">
+                    <i class="fa-solid fa-envelope email-icon"></i>
+                    <div>
+                        <p class="contact-label">E-mail</p>
+                        <p class="contact-value text-small">radiofeangola2022@gmail.com</p>
+                    </div>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100081539078243" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-facebook facebook-icon"></i>
+                    <div>
+                        <p class="contact-label">Facebook</p>
+                        <p class="contact-value">Rádio Fé Angola</p>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/radiofeangola?igsh=YzljYTk1ODg3Zg==" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-instagram instagram-icon"></i>
+                    <div>
+                        <p class="contact-label">Instagram</p>
+                        <p class="contact-value">Rádio Fé Angola</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <footer class="footer-controls">
+            <section class="player-controls">
+                <div class="action-buttons">
+                    <button class="icon-btn minor-btn"><i class="fa-solid fa-bed"></i></button>
+                    <button class="icon-btn nav-btn"><i class="fa-solid fa-backward-step"></i></button>
+                    <button class="play-btn" id="play-pause-btn"><i class="fa-solid fa-play"></i></button>
+                    <button class="icon-btn nav-btn"><i class="fa-solid fa-forward-step"></i></button>
+                    <button class="icon-btn minor-btn fav-btn"><i class="fa-solid fa-heart"></i></button>
+                </div>
+
+                <div class="volume-container">
+                    <i class="fa-solid fa-volume-low"></i>
+                    <input type="range" class="volume-slider" min="0" max="100" value="70">
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+            </section>
+
+            <nav class="bottom-nav">
+                <a href="#" class="nav-item active" onclick="switchScreen('screen-aovivo', this)">
+                    <i class="fa-solid fa-tower-broadcast"></i>
+                    <span>Ao vivo</span>
+                </a>
+                <a href="#" class="nav-item" onclick="switchScreen('screen-programacao', this)">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span>Programação</span>
+                </a>
+                <a href="#" class="nav-item" onclick="switchScreen('screen-aovivo', this)">
+                    <i class="fa-solid fa-microphone"></i>
+                    <span>Podcasts</span>
+                </a>
+                <a href="#" class="nav-item" onclick="switchScreen('screen-ajustes', this)">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Ajustes</span>
+                </a>
+            </nav>
+        </footer>
+    </div>
+
+    <script>
+        const stream = document.getElementById('radio-stream');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const volumeSlider = document.querySelector('.volume-slider');
+        const logoWrapper = document.getElementById('logo-wrapper');
+        const listenersElement = document.getElementById('live-listeners');
+
+        // 1. Lógica do Streaming com Ativação de Animação de Ondas
+        playPauseBtn.addEventListener('click', function() {
+            if (stream.paused) {
+                stream.load(); 
+                stream.play();
+                playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                logoWrapper.classList.add('playing'); // Ativa as ondas de batida
+            } else {
+                stream.pause();
+                playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                logoWrapper.classList.remove('playing'); // Desativa as ondas de batida
+            }
+        });
+
+        // 2. Controlo de Volume
+        volumeSlider.addEventListener('input', function(e) {
+            stream.volume = e.target.value / 100;
+        });
+
+        // 3. Ouvintes Dinâmicos (Atualiza simulando acessos reais a cada 4 segundos)
+        let totalListeners = 5  ;
+        function updateListeners() {
+            // Gera uma variação pequena (entre -5 e +7 ouvintes por ciclo)
+            const variation = Math.floor(Math.random() * 13) - 5;
+            totalListeners += variation;
+            
+            // Formata o número com o ponto de milhar (ex: 12.458)
+            listenersElement.innerText = totalListeners.toLocaleString('pt-PT');
+        }
+        setInterval(updateListeners, 4000); // Executa a função a cada 4000ms (4 segundos)
+
+        // 4. Sistema de Troca de Ecrãs
+        function switchScreen(screenId, element) {
+            document.querySelectorAll('.player-screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
